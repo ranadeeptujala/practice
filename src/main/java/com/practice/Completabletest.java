@@ -7,11 +7,8 @@ import java.util.concurrent.Executors;
 public class Completabletest {
     public static void main(String[] args) {
         System.out.println("Main thread: " + Thread.currentThread().getName());
-        
-        // Create custom thread pool
-        ExecutorService executor = Executors.newFixedThreadPool(3);
-        
-        // Task 1: Fetch user data (simulated)
+     ExecutorService executor = Executors.newCachedThreadPool(Thread.ofVirtual().factory());
+     ExecutorService executor1 = Executors.newVirtualThreadPerTaskExecutor();
         CompletableFuture<String> userFuture = CompletableFuture.supplyAsync(() -> {
             System.out.println("Fetching user on: " + Thread.currentThread().getName());
             sleep(1000);
